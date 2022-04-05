@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants';
 
-const SecondaryStory = ({ id, title, image, location, abstract }) => {
+const SecondaryStory = ({ id, title, image, location, abstract, className }) => {
   return (
-    <a href={`/story/${id}`}>
+    <a href={`/story/${id}`} className={className}>
       <Wrapper>
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
@@ -21,15 +22,26 @@ const Wrapper = styled.article`
   gap: 4px 16px;
   grid-template-columns: 120px 1fr;
   color: var(--color-gray-900);
+
+  @media ${QUERIES.tabletOnly} {
+    gap: 8px 16px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'image'
+    'heading'
+    'abstract';
+  }
 `;
 
 const Image = styled.img`
   grid-area: image;
   display: block;
   width: 100%;
-  height: 120px;
+  min-height: 120px;
+  max-width: 400px;
   border-radius: 4px;
   object-fit: cover;
+  aspect-ratio: 2.1;
 `;
 
 const Heading = styled.h2`
@@ -45,6 +57,13 @@ const Abstract = styled.p`
   grid-area: abstract;
   font-size: 1rem;
   white-space: pre-wrap;
+
+  @media ${QUERIES.desktopAndUp} {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 export default SecondaryStory;

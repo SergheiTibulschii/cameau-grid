@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Menu, Search, User } from 'react-feather';
+import { Link, Menu, Search, User } from 'react-feather';
 
-import { QUERIES } from '../../constants';
+import { FAMILIES, QUERIES } from '../../constants';
 
 import MaxWidthWrapper from '../MaxWidthWrapper';
 import Logo from '../Logo';
 import Button from '../Button';
 
 const Header = () => {
+
   return (
-    <header>
+    <Container>
       <SuperHeader>
         <Row>
           <ActionGroup>
@@ -21,29 +22,58 @@ const Header = () => {
               <Menu size={24} />
             </button>
           </ActionGroup>
-          <ActionGroup>
+          <UserGroup>
             <button>
               <User size={24} />
             </button>
-          </ActionGroup>
+          </UserGroup>
         </Row>
       </SuperHeader>
       <MainHeader>
         <Logo />
       </MainHeader>
-    </header>
+      <SubscribeContainer>
+        <Button>Subscriber</Button>
+        <SubscriberLink>Already a subscriber?</SubscriberLink>
+      </SubscribeContainer>
+    </Container>
   );
 };
+
+const Container = styled.header`
+  display: grid;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  
+  @media ${QUERIES.laptopAndUp} {
+    grid-template-columns: auto 1fr auto;
+    box-sizing: content-box;
+    padding: 0 32px;
+  }
+`
 
 const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
+
+  grid-row: 1 / -1;
+
+  @media ${QUERIES.laptopAndUp} {
+    width: auto;
+    background: none;
+    color: var(--color-gray-900);
+  }
 `;
 
 const Row = styled(MaxWidthWrapper)`
   display: flex;
   justify-content: space-between;
+
+  @media ${QUERIES.laptopAndUp} {
+    padding: 0;
+  }
 `;
 
 const ActionGroup = styled.div`
@@ -59,6 +89,12 @@ const ActionGroup = styled.div`
   }
 `;
 
+const UserGroup = styled(ActionGroup)`
+  @media ${QUERIES.laptopAndUp} {
+    display: none;
+  }
+`
+
 const MainHeader = styled(MaxWidthWrapper)`
   display: flex;
   align-items: center;
@@ -66,5 +102,24 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-top: 32px;
   margin-bottom: 48px;
 `;
+
+const SubscribeContainer = styled.div`
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
+  }
+`
+
+//TODO:  extract
+const SubscriberLink = styled.a`
+  font-family: ${FAMILIES.serif};
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration: underline;
+`
 
 export default Header;
