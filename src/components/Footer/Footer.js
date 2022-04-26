@@ -1,6 +1,7 @@
 import React from 'react';
 import { Twitter, Facebook } from 'react-feather';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants';
 import MaxWidthWrapper from '../MaxWidthWrapper';
 
 import VisuallyHidden from '../VisuallyHidden';
@@ -144,6 +145,16 @@ const TopRow = styled.div`
   font-size: 0.875rem;
   border-bottom: 1px solid var(--color-gray-700);
   padding: 24px 0;
+
+  @media ${QUERIES.tabletAndUp} {
+    justify-content: center;
+    flex-direction: row;
+    gap: 48px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    justify-content: flex-end;
+  }
 `;
 
 const Social = styled.div`
@@ -165,11 +176,18 @@ const TopNavList = styled.ul`
 `;
 
 const MainNavArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  --gap: 20px;
+  --w: min(calc(250px - var(--gap) / 2), 100%);
   padding: 32px 0 48px;
   text-align: center;
+
+  display: grid;
+  gap: 20px;
+  
+  @media ${QUERIES.tabletAndUp} {
+    text-align: initial;
+    grid-template-columns: repeat(auto-fit, minmax(var(--w), 1fr));
+  }
 `;
 
 const MainNavHeading = styled.h2`
@@ -196,6 +214,10 @@ const Subfooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${QUERIES.laptopAndUp} {
+    align-items: flex-start;
+  }
 `;
 
 const Logo = styled.a`

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Link, Menu, Search, User } from 'react-feather';
+import { Menu, Search, User } from 'react-feather';
 
 import { FAMILIES, QUERIES } from '../../constants';
 
